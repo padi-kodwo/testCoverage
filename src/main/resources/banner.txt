@@ -1,0 +1,16 @@
+
+ ███████████    █████████   ██████████   █████
+░░███░░░░░███  ███░░░░░███ ░░███░░░░███ ░░███
+ ░███    ░███ ░███    ░███  ░███   ░░███ ░███
+ ░██████████  ░███████████  ░███    ░███ ░███
+ ░███░░░░░░   ░███░░░░░███  ░███    ░███ ░███
+ ░███         ░███    ░███  ░███    ███  ░███
+ █████        █████   █████ ██████████   █████
+░░░░░        ░░░░░   ░░░░░ ░░░░░░░░░░   ░░░░░
+
+
+
+Powered by Spring Boot ${spring-boot.version}
+
+:: Starting :: ${spring.application.name} ${application.version} :: Running Spring Boot ${spring-boot.version} - ${info.build.version} ::
+:: https://www.padiamu.dev ::

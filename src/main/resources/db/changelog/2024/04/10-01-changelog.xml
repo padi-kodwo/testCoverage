@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <property name="uuid_function" value="uuid()" dbms="mysql"/>
+
+    <!--Added the entity User-->
+    <changeSet id="201705030000-1" author="padi.amu">
+        <createTable tableName="users">
+            <column name="id" type="varchar(128)" valueComputed="${uuid_function}">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(128)">
+                <constraints nullable="false" />
+            </column>
+            <column name="dateOfBirth" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="createdAt" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="modifiedAt" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Added the entity User-->
+    <changeSet id="202404161123-1" author="padi.amu">
+        <insert tableName="users">
+            <column name="id" valueComputed="${uuid_function}"/>
+            <column name="name" value="Padi"/>
+            <column name="dateOfBirth" valueDate="now()"/>
+            <column name="createdAt" valueDate="now()"/>
+            <column name="modifiedAt" valueDate="now()"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

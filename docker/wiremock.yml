@@ -1,0 +1,14 @@
+version: '2'
+services:
+  wiremock-helper:
+    image: ekino/wiremock:latest
+    ports:
+      - 8084:8080
+    volumes:
+      - ./resources/wiremock-helper/files:/wiremock/__files
+      - ./resources/wiremock-helper/mappings:/wiremock/mappings
+    entrypoint:
+      - java
+      - -jar
+      - wiremock.jar
+      - --verbose

@@ -1,0 +1,46 @@
+version: '3'
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.2
+    container_name: kibana
+    environment:
+      SERVER_NAME: kibana.dev
+      ELASTICSEARCH_HOSTS: http://es01:9200
+    ports:
+      - 5601:5601
+
+  index-template:
+    image: curlimages/curl
+    container_name: templates
+    command: /bin/sh -c "/tmp/elastic/entrypoint.sh"
+    volumes:
+      - ./resources/elastic:/tmp/elastic
+    depends_on:
+      - es01
+
+  elasticdump:
+    image: elasticdump/elasticsearch-dump
+    container_name: dump
+    command: [ "--input", "/tmp/elastic/dump.json", "--output", "http://es01:9200" ]
+    volumes:
+      - ./resources/elastic:/tmp/elastic
+    depends_on:
+      - es01
+      - index-template
+

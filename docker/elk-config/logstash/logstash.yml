@@ -1,0 +1,3 @@
+http.host: ${http.host}
+xpack.monitoring.elasticsearch.hosts: ${xpack.monitoring.elasticsearch.hosts}
+xpack.monitoring.enabled: ${xpack.monitoring.enabled}

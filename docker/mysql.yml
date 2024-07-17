@@ -1,4 +1,4 @@
-version: '2'
+version: '3.8'
 services:
   dots-mysql:
     image: mysql
@@ -7,3 +7,7 @@ services:
     ports:
       - 3306:3306
     command: mysqld --lower_case_table_names=1 --skip-ssl --explicit_defaults_for_timestamp --event-scheduler=1
+    deploy:
+      resources:
+        limits:
+          memory: 512M

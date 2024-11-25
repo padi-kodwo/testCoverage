@@ -5,9 +5,26 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - 3306:3306
-    command: mysqld --lower_case_table_names=1 --skip-ssl --explicit_defaults_for_timestamp --event-scheduler=1
+      - "3306:3306"
+    command: mysqld --lower_case_table_names=1 --explicit_defaults_for_timestamp --event-scheduler=1
     deploy:
       resources:
         limits:
           memory: 512M
+
+  mysql:
+      image: mysql:8.0
+      restart: always
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      ports:
+        - "3306:3306"
+      volumes:
+        - mysql_data:/var/lib/mysql
+      command: [
+        "--default-authentication-plugin=mysql_native_password",
+        "--skip-ssl"
+      ]
+
+volumes:
+    mysql_data:
